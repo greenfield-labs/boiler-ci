@@ -1,0 +1,13 @@
+name: 'Boiler Gate'
+description: 'Requests approval from a gate'
+author: 'GitHub'
+inputs:
+  name:
+    description: 'the name of the gate'
+    default: ''
+  api-token:
+    description: 'Boiler API token'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
