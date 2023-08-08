@@ -1,9 +1,11 @@
+require 'pry'
 require 'http'
 
-HTTP.post(
-  "https://boiler.ngrok.dev/api/gate",
-  headers: {
-    "BOILER_CLIENT_ID": ENV["BOILER_CLIENT_ID"],
-    "BOILER_CLIENT_SECRET": ENV["BOILER_CLIENT_SECRET"]
-  }
+response = HTTP.headers(
+  'x-boiler-client-id': ENV["BOILER_CLIENT_ID"],
+  'x-boiler-client-secret': ENV["BOILER_CLIENT_SECRET"]
+).get(
+  "https://boiler.ngrok.dev/api/gate/approve"
 )
+
+binding.pry
