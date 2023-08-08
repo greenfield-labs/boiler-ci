@@ -1,15 +1,11 @@
 # Use the slim Ruby base image
-FROM ruby:2.7-slim
+FROM ruby:3.2-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Gemfile and Gemfile.lock first
 COPY Gemfile Gemfile.lock ./
-
-# Install necessary dependencies for building native extensions
-# (modify this step based on your specific gem dependencies)
-RUN apt-get update -qq && apt-get install -y build-essential
 
 # Install gems
 RUN bundle install
