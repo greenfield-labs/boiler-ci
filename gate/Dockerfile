@@ -8,7 +8,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 
 # Install gems
-RUN bundle install
+RUN apk add libffi-dev && bundle install 
 
 # Copy the rest of your application into the container
 COPY . .
