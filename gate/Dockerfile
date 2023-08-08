@@ -15,5 +15,7 @@ RUN bundle install
 # Copy the rest of your application into the container
 COPY . .
 
+CMD ["/app/action.sh"]
+
 # Your other Docker commands, e.g., setting the default command for the container
 CMD ["bundle", "exec", "ruby", "/app/action.rb"]
