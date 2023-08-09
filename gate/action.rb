@@ -7,12 +7,14 @@ exchange = HTTP.headers(
   ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
 )
 
+
 puts "EXCHANGE: #{exchange.code}"
 puts "EXCHANGE body: #{exchange.body}"
 
 response = HTTP.headers(
   'x-boiler-client-id': ENV["BOILER_CLIENT_ID"],
   'x-boiler-client-secret': ENV["BOILER_CLIENT_SECRET"],
+  'x-boiler-exchange': exchange.body,
   'x-github-oidc-url': ENV["ACTIONS_ID_TOKEN_REQUEST_URL"],
   'x-github-oidc-token-request-token': ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]
 ).get(
