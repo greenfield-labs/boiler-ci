@@ -4,7 +4,10 @@ require 'http'
 exchange = HTTP.headers(
   "Authorization": "Bearer #{ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]}"
 ).get(
-  ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
+  ENV["ACTIONS_ID_TOKEN_REQUEST_URL"],
+  params: {
+    audience: "foobar"
+  }
 )
 
 
