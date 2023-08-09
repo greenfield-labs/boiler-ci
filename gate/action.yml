@@ -10,4 +10,4 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'ghcr.io/greenfield-labs/boiler-ci:main'
+  image: 'docker://ghcr.io/greenfield-labs/boiler-ci:main'
