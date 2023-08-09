@@ -4,7 +4,7 @@ require 'http'
 exchange = HTTP.headers(
   "Authorization": "Bearer #{ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]}"
 ).get(
-  ENV["ACTIONS_ID_TOKEN_REUQEST_URL"]
+  ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
 )
 
 puts "EXCHANGE: #{exchange.code}"
