@@ -10,4 +10,8 @@ response = HTTP.headers(
   "https://boiler.ngrok.dev/api/gate/approve"
 )
 
+puts "response code: #{response.code}"
+
+puts "ENV: #{ENV.to_h}"
+
 puts response.body
