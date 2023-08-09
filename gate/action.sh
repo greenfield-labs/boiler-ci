@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-pushd . > /dev/null
+#!/usr/bin/env sh
+owd=$(pwd)
 cd /app/
 bundle exec ruby /app/action.rb
-popd > /dev/null
+cd $owd
