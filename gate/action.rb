@@ -8,7 +8,7 @@ exchange = HTTP.headers(
 )
 
 puts "EXCHANGE: #{exchange.code}"
-exchange_body = exchange.body
+exchange_body = exchange.body.to_s
 
 response = HTTP.headers(
   'x-boiler-client-id': ENV["BOILER_CLIENT_ID"],
