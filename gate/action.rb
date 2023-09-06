@@ -11,6 +11,7 @@ puts "EXCHANGE: #{exchange.code}"
 exchange_body = exchange.body.to_s
 
 response = HTTP.headers(
+  'content-type': 'application/json',  
   'x-boiler-client-id': ENV["BOILER_CLIENT_ID"],
   'x-boiler-client-secret': ENV["BOILER_CLIENT_SECRET"],
   'x-boiler-exchange': exchange_body,
