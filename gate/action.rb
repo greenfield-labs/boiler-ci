@@ -1,25 +1,31 @@
 require 'pry'
 require 'http'
+require 'pathname'
 
-exchange = HTTP.headers(
-  "Authorization": "Bearer #{ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]}"
-).get(
-  ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
-)
+if ENV["BOILER_LOCAL"]
+  puts "Using local Boiler JWT"
 
-puts "EXCHANGE: #{exchange.code}"
-exchange_body = exchange.body.to_s
+  jwt_path = Pathname.pwd.join("../../backend/jwt")
+  jwt_contents = File.read(jwt_path).chomp
+else
+  puts "Using GitHub JWT exchange"
+
+  exchange = HTTP.headers(
+    "Authorization": "Bearer #{ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]}"
+  ).get(
+    ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
+  )
+
+  puts "EXCHANGE: #{exchange.code}"
+  exchange_body = exchange.body.to_s
+  jwt_contents = JSON.parse(exchange_body)['value']
+end
 
 response = HTTP.headers(
-  'content-type': 'application/json',  
-  'x-boiler-client-id': ENV["BOILER_CLIENT_ID"],
-  'x-boiler-client-secret': ENV["BOILER_CLIENT_SECRET"],
-  'x-boiler-exchange': exchange_body,
-  'x-github-oidc-token': JSON.parse(exchange_body)['value']
+  'content-type': 'application/json',
+  'x-github-oidc-token': jwt_contents
 ).get(
   "https://boiler.ngrok.dev/api/gate/approve"
 )
-
-puts "ENV: #{ENV.to_h}"
 
 puts response.body
