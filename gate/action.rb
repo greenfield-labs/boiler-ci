@@ -5,7 +5,7 @@ require 'pathname'
 if ENV["BOILER_LOCAL"]
   puts "Using local Boiler JWT"
 
-  jwt_path = Pathname.pwd.join("../../backend/jwt")
+  jwt_path = Pathname.pwd.join("../../backend/.jwt")
   jwt_contents = File.read(jwt_path).chomp
 else
   puts "Using GitHub JWT exchange"
