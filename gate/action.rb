@@ -3,12 +3,15 @@ require 'pathname'
 
 class Authentication
   def authorize!
-    HTTP
+    puts "Starting boiler token exchange"
+    response = HTTP
       .headers(
         'content-type': 'application/json',
         'x-github-oidc-token': client_token
       )
       .post("https://boiler.ngrok.dev/api/github/authorize")
+
+    puts "Token exchange ressults #{response.body}"
   end
 
   protected
