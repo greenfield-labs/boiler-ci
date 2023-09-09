@@ -11,7 +11,7 @@ class Authentication
       )
       .post("https://boiler.ngrok.dev/api/github/authorize")
 
-    puts "Token exchange ressults #{response.body}"
+    puts "Token exchange results #{response.body}"
   end
 
   protected
@@ -36,7 +36,7 @@ class Authentication
     exchange = HTTP.headers(
       "Authorization": "Bearer #{ENV["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]}"
     ).get(
-      ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]
+      "#{ENV["ACTIONS_ID_TOKEN_REQUEST_URL"]}&audience=boiler-ci"
     )
 
     exchange_body = exchange.body.to_s
