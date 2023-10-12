@@ -1,6 +1,6 @@
 require 'http'
 require 'pathname'
-
+require 'pry'
 class Authentication
   def authorize!
     puts "Starting boiler token exchange"
@@ -46,7 +46,8 @@ class Authentication
 end
 
 def run
-  auth = Authentication.new.authorize!
+  auth = Authentication.new
+  auth.authorize!
 
   response = HTTP.headers(
     'content-type': 'application/json',
